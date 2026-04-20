@@ -1,0 +1,49 @@
+.dialog-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  white-space: normal;
+  max-width: 100%;
+  padding: 0 1rem;
+}
+
+.dialog-details-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 600px;
+  width: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+#main {
+  background-color:grey;
+}
+
+rux-push-button {
+  color: white;
+}
+
+rux-table-header-cell {
+    color: #24C764;
+}
+
+rux-push-button.ack-button[checked]::part(container) {
+  background-color: #141516 !important;
+  color: black !important;
+  border: 1px solid #b87d7d;
+  box-shadow: none;
+}
+
+rux-push-button.ack-button::part(container) {
+  background-color: #24C764;
+  color: black !important;
+  border: 1px solid #24C764;
+}
+
+.mouse-hover:hover {
+  cursor: pointer;
+}

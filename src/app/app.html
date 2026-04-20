@@ -1,0 +1,37 @@
+<div style="display: flex; justify-content: center">
+  <rux-global-status-bar
+    include-icon="false"
+    app-name="Satellite Info">
+    <div style="padding-right: 10%">
+      <rux-tabs id="tab-set-id">
+        <rux-tab id="contact-dashboard-id">Satellites</rux-tab>
+        <rux-tab id="alert-dashboard-id">Alerts</rux-tab>
+      </rux-tabs>
+    </div>
+  </rux-global-status-bar>
+</div>
+
+<rux-tab-panels aria-labelledby="tab-set-id">
+  <rux-tab-panel aria-labelledby="contact-dashboard-id">
+    <div
+      style="
+        padding: 1vw;
+        border: rgba(255, 255, 255, 0.15) dashed 1px;
+        font-family: monospace;
+      "
+    >
+      <app-home></app-home>
+    </div>
+  </rux-tab-panel>
+  <rux-tab-panel aria-labelledby="alert-dashboard-id">
+    <div
+      style="
+        padding: 1vw;
+        border: rgba(255, 255, 255, 0.15) dashed 1px;
+        font-family: monospace;
+      "
+    >
+      <app-alert-dashboard></app-alert-dashboard>
+    </div>
+  </rux-tab-panel>
+</rux-tab-panels>

@@ -1,0 +1,105 @@
+<!-- Alert Dashboard HTML-->
+<div>
+  <h1>Alerts</h1>
+</div>
+<div>
+  <rux-table id="main">
+    <rux-table-header>
+      <rux-table-header-row>
+        <rux-table-header-cell
+          (click)="sortData('errorMessage')"
+          class="mouse-hover"
+          >Alert Message
+          <span *ngIf="sortedColumn === 'errorMessage'">
+            {{ sortDirection === "asc" ? "↑" : "↓" }}
+          </span></rux-table-header-cell
+        >
+        <rux-table-header-cell
+          (click)="sortData('contactName')"
+          class="mouse-hover"
+          >Contact Name
+          <span *ngIf="sortedColumn === 'contactName'">
+            {{ sortDirection === "asc" ? "↑" : "↓" }}
+          </span>
+        </rux-table-header-cell>
+        <rux-table-header-cell>Contact Time</rux-table-header-cell>
+        <rux-table-header-cell
+          (click)="sortData('errorTime')"
+          class="mouse-hover"
+          >Error Time
+          <span *ngIf="sortedColumn === 'errorTime'">
+            {{ sortDirection === "asc" ? "↑" : "↓" }}
+          </span></rux-table-header-cell
+        >
+        <rux-table-header-cell
+          (click)="sortData('errorSeverity')"
+          class="mouse-hover"
+          >Severity
+          <span *ngIf="sortedColumn === 'errorSeverity'">
+            {{ sortDirection === "asc" ? "↑" : "↓" }}
+          </span></rux-table-header-cell
+        >
+        <rux-table-header-cell>Details</rux-table-header-cell>
+        <rux-table-header-cell
+          (click)="sortData('acknowledgeSort')"
+          class="mouse-hover"
+          >Acknowledge<span *ngIf="sortedColumn === 'acknowledgeSort'">
+            {{ sortDirection === "asc" ? "↑" : "↓" }}
+          </span></rux-table-header-cell
+        >
+      </rux-table-header-row>
+    </rux-table-header>
+    <rux-table-body>
+      <rux-table-row *ngFor="let alert of sortedAlerts">
+        <rux-table-cell>{{ alert.errorMessage }}</rux-table-cell>
+        <rux-table-cell>{{ alert.contactName }}</rux-table-cell>
+        <rux-table-cell>
+          {{ alert.contactBeginTimestamp }}
+          -
+          {{ alert.contactEndTimestamp }}
+        </rux-table-cell>
+        <rux-table-cell>{{ alert.errorTime }}</rux-table-cell>
+        <rux-table-cell>{{ alert.errorSeverity }}</rux-table-cell>
+        <rux-table-cell>
+          <div style="padding: 5%; justify-content: center; padding-left: 0px">
+            <rux-button (click)="showDetails(alert.contact)">
+              Details
+            </rux-button>
+          </div>
+          <rux-dialog
+            [open]="isDetailsOpen"
+            (ruxdialogclosed)="isDetailsOpen = false"
+            header="Details"
+            class="dialog-details-main"
+          >
+            <div class="dialog-details" *ngIf="selectedContact">
+              <div>Satellite: {{ selectedContact.contactSatellite }}</div>
+              <div style="width: auto">
+                Contact Details: {{ selectedContact.contactDetail }}
+              </div>
+              <div style="width: auto">
+                Begin Time: {{ selectedContact.contactBeginTimestamp  }}
+              </div>
+              <div style="width: auto">
+                End Time: {{ selectedContact.contactEndTimestamp }}
+              </div>
+            </div>
+            <rux-button slot="footer" (click)="isDetailsOpen = false">
+              Close
+            </rux-button>
+          </rux-dialog>
+        </rux-table-cell>
+        <rux-table-cell>
+          <rux-push-button 
+            label="{{ acknowledgeText }}"
+            class="ack-button"
+            (click)="isAcknowledged(alert, alert.contact)"
+            [disabled]="isContactAcknowledged(alert, alert.contact)"
+            [checked]="isContactAcknowledged(alert, alert.contact)"
+          >
+          </rux-push-button>
+        </rux-table-cell>
+      </rux-table-row>
+    </rux-table-body>
+  </rux-table>
+</div>
